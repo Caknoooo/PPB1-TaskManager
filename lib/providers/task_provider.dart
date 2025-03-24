@@ -32,13 +32,12 @@ class TaskProvider with ChangeNotifier {
     }
   }
 
-  // Add a new task
   Future<void> addTask(Task task) async {
     try {
       final id = await DatabaseHelper.instance.createTask(task);
       final newTask = task.copyWith(id: id);
 
-      _tasks.insert(0, newTask); // Add to the beginning of the list
+      _tasks.insert(0, newTask);
       await _updateTaskCounts();
       notifyListeners();
     } catch (e) {
@@ -47,7 +46,6 @@ class TaskProvider with ChangeNotifier {
     }
   }
 
-  // Update an existing task
   Future<void> updateTask(Task task) async {
     try {
       await DatabaseHelper.instance.updateTask(task);
@@ -65,7 +63,6 @@ class TaskProvider with ChangeNotifier {
     }
   }
 
-  // Toggle task completion status
   Future<void> toggleTaskCompletion(int id, bool isCompleted) async {
     try {
       final index = _tasks.indexWhere((task) => task.id == id);
@@ -88,7 +85,6 @@ class TaskProvider with ChangeNotifier {
     }
   }
 
-  // Delete a task
   Future<void> deleteTask(int id) async {
     try {
       await DatabaseHelper.instance.deleteTask(id);
@@ -102,18 +98,15 @@ class TaskProvider with ChangeNotifier {
     }
   }
 
-  // Update task counts
   Future<void> _updateTaskCounts() async {
     _taskCounts = await DatabaseHelper.instance.getTaskCounts();
   }
 
-  // Menambahkan method untuk mengatur filter
   void setFilter(String filter) {
     _currentFilter = filter;
     notifyListeners();
   }
 
-  // Menambahkan method untuk mendapatkan task yang sudah difilter
   List<Task> _getFilteredTasks() {
     switch (_currentFilter) {
       case 'completed':

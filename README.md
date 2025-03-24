@@ -1,16 +1,54 @@
-# task_manager
+# Task Manager
 
-A new Flutter project.
+Aplikasi manajemen tugas (Task Manager) yang dikembangkan menggunakan Flutter. Aplikasi ini memungkinkan pengguna untuk mengelola tugas-tugas mereka dengan mudah, termasuk menambah, mengedit, menghapus, dan melacak status tugas.
 
-## Getting Started
+## Fitur
 
-This project is a starting point for a Flutter application.
+- 📝 Tambah, edit, dan hapus tugas
+- ✅ Tandai tugas sebagai selesai/belum selesai
+- 📅 Atur tanggal deadline tugas
+- 🎯 Atur prioritas tugas (tinggi, sedang, rendah)
+- 🔍 Filter tugas berdasarkan status dan prioritas
+- 📊 Ringkasan status tugas (total, selesai, belum selesai)
+- 💾 Penyimpanan lokal menggunakan SQLite
+- 📱 Antarmuka yang responsif dan modern
 
-A few resources to get you started if this is your first Flutter project:
+## Teknologi yang Digunakan
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter
+- Provider (State Management)
+- SQLite (Database)
+- Flutter Slidable
+- Intl (Format Tanggal)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Documentation
+
+https://github.com/user-attachments/assets/3bca4a8a-e56b-4b6c-8e40-e206acd24c4b
+
+## Cara Menjalankan
+
+1. Clone repository ini
+```bash
+git clone https://github.com/yourusername/task_manager.git
+```
+
+2. Masuk ke direktori proyek
+```bash
+cd task_manager
+```
+
+3. Install dependencies
+```bash
+flutter pub get
+```
+
+4. Jalankan aplikasi
+```bash
+flutter run
+```
+
+## Pengembang
+
+- **Nama:** M Naufal Badruttamam
+- **NRP:** 5025211240
+- **Kelas:** Pemrograman Perangkat Bergerak B
