@@ -29,7 +29,7 @@ https://github.com/user-attachments/assets/3bca4a8a-e56b-4b6c-8e40-e206acd24c4b
 
 1. Clone repository ini
 ```bash
-git clone https://github.com/yourusername/task_manager.git
+git clone https://github.com/Caknoooo/PPB1-TaskManager.git task_manager
 ```
 
 2. Masuk ke direktori proyek
