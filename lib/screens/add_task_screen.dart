@@ -29,9 +29,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add New Task'),
-      ),
+      appBar: AppBar(title: const Text('Add New Task')),
       body: Form(
         key: _formKey,
         child: Padding(
@@ -91,7 +89,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Priority Selector
                 InputDecorator(
                   decoration: const InputDecoration(
                     labelText: 'Priority',
@@ -102,39 +99,40 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     child: DropdownButton<TaskPriority>(
                       value: _priority,
                       isExpanded: true,
-                      items: TaskPriority.values.map((priority) {
-                        IconData icon;
-                        Color color;
-                        
-                        switch (priority) {
-                          case TaskPriority.low:
-                            icon = Icons.flag;
-                            color = Colors.green;
-                            break;
-                          case TaskPriority.medium:
-                            icon = Icons.flag;
-                            color = Colors.orange;
-                            break;
-                          case TaskPriority.high:
-                            icon = Icons.flag;
-                            color = Colors.red;
-                            break;
-                        }
-                        
-                        return DropdownMenuItem<TaskPriority>(
-                          value: priority,
-                          child: Row(
-                            children: [
-                              Icon(icon, color: color, size: 20),
-                              const SizedBox(width: 8),
-                              Text(
-                                priority.toString().split('.').last,
-                                style: TextStyle(color: color),
+                      items:
+                          TaskPriority.values.map((priority) {
+                            IconData icon;
+                            Color color;
+
+                            switch (priority) {
+                              case TaskPriority.low:
+                                icon = Icons.flag;
+                                color = Colors.green;
+                                break;
+                              case TaskPriority.medium:
+                                icon = Icons.flag;
+                                color = Colors.orange;
+                                break;
+                              case TaskPriority.high:
+                                icon = Icons.flag;
+                                color = Colors.red;
+                                break;
+                            }
+
+                            return DropdownMenuItem<TaskPriority>(
+                              value: priority,
+                              child: Row(
+                                children: [
+                                  Icon(icon, color: color, size: 20),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    priority.toString().split('.').last,
+                                    style: TextStyle(color: color),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
+                            );
+                          }).toList(),
                       onChanged: (value) {
                         if (value != null) {
                           setState(() {
@@ -147,18 +145,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
                 const SizedBox(height: 32),
 
-                // Submit Button
                 ElevatedButton(
                   onPressed: _isLoading ? null : _submitForm,
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: _isLoading
-                      ? const CircularProgressIndicator()
-                      : const Text(
-                          'Add Task',
-                          style: TextStyle(fontSize: 16),
-                        ),
+                  child:
+                      _isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text(
+                            'Add Task',
+                            style: TextStyle(fontSize: 16),
+                          ),
                 ),
               ],
             ),
@@ -197,16 +195,19 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           priority: _priority,
         );
 
-        await Provider.of<TaskProvider>(context, listen: false).addTask(newTask);
-        
+        await Provider.of<TaskProvider>(
+          context,
+          listen: false,
+        ).addTask(newTask);
+
         if (mounted) {
           Navigator.pop(context, true);
         }
       } catch (e) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error adding task: $e')),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('Error adding task: $e')));
         }
       } finally {
         if (mounted) {

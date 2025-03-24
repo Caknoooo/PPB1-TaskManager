@@ -26,7 +26,9 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: widget.task.title);
-    _descriptionController = TextEditingController(text: widget.task.description);
+    _descriptionController = TextEditingController(
+      text: widget.task.description,
+    );
     _dueDate = widget.task.dueDate;
     _priority = widget.task.priority;
     _isCompleted = widget.task.isCompleted;
@@ -42,9 +44,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Task'),
-      ),
+      appBar: AppBar(title: const Text('Edit Task')),
       body: Form(
         key: _formKey,
         child: Padding(
@@ -129,39 +129,40 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     child: DropdownButton<TaskPriority>(
                       value: _priority,
                       isExpanded: true,
-                      items: TaskPriority.values.map((priority) {
-                        IconData icon;
-                        Color color;
-                        
-                        switch (priority) {
-                          case TaskPriority.low:
-                            icon = Icons.flag;
-                            color = Colors.green;
-                            break;
-                          case TaskPriority.medium:
-                            icon = Icons.flag;
-                            color = Colors.orange;
-                            break;
-                          case TaskPriority.high:
-                            icon = Icons.flag;
-                            color = Colors.red;
-                            break;
-                        }
-                        
-                        return DropdownMenuItem<TaskPriority>(
-                          value: priority,
-                          child: Row(
-                            children: [
-                              Icon(icon, color: color, size: 20),
-                              const SizedBox(width: 8),
-                              Text(
-                                priority.toString().split('.').last,
-                                style: TextStyle(color: color),
+                      items:
+                          TaskPriority.values.map((priority) {
+                            IconData icon;
+                            Color color;
+
+                            switch (priority) {
+                              case TaskPriority.low:
+                                icon = Icons.flag;
+                                color = Colors.green;
+                                break;
+                              case TaskPriority.medium:
+                                icon = Icons.flag;
+                                color = Colors.orange;
+                                break;
+                              case TaskPriority.high:
+                                icon = Icons.flag;
+                                color = Colors.red;
+                                break;
+                            }
+
+                            return DropdownMenuItem<TaskPriority>(
+                              value: priority,
+                              child: Row(
+                                children: [
+                                  Icon(icon, color: color, size: 20),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    priority.toString().split('.').last,
+                                    style: TextStyle(color: color),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
+                            );
+                          }).toList(),
                       onChanged: (value) {
                         if (value != null) {
                           setState(() {
@@ -180,12 +181,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: _isLoading
-                      ? const CircularProgressIndicator()
-                      : const Text(
-                          'Update Task',
-                          style: TextStyle(fontSize: 16),
-                        ),
+                  child:
+                      _isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text(
+                            'Update Task',
+                            style: TextStyle(fontSize: 16),
+                          ),
                 ),
               ],
             ),
@@ -226,16 +228,19 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
           updatedAt: DateTime.now(),
         );
 
-        await Provider.of<TaskProvider>(context, listen: false).updateTask(updatedTask);
-        
+        await Provider.of<TaskProvider>(
+          context,
+          listen: false,
+        ).updateTask(updatedTask);
+
         if (mounted) {
           Navigator.pop(context, true);
         }
       } catch (e) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error updating task: $e')),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('Error updating task: $e')));
         }
       } finally {
         if (mounted) {

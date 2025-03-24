@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'providers/task_provider.dart';
 import 'screens/home_screen.dart';
+import 'dart:io';
 
 void main() {
-  sqfliteFfiInit();
-  databaseFactory = databaseFactoryFfi;
-  
+  if (Platform.isWindows || Platform.isLinux) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
   runApp(const MyApp());
 }
 
@@ -25,10 +27,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
-          appBarTheme: const AppBarTheme(
-            elevation: 0,
-            centerTitle: true,
-          ),
+          appBarTheme: const AppBarTheme(elevation: 0, centerTitle: true),
           cardTheme: CardTheme(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),

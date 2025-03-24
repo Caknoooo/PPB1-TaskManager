@@ -90,12 +90,18 @@ class TaskCard extends StatelessWidget {
                       task.isCompleted ? TextDecoration.lineThrough : null,
                   color: task.isCompleted ? Colors.grey : null,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
               subtitle: Row(
                 children: [
                   const Icon(Icons.calendar_today, size: 14),
                   const SizedBox(width: 4),
-                  Text(DateFormatter.formatDate(task.dueDate)),
+                  Expanded(
+                    child: Text(
+                      DateFormatter.formatDate(task.dueDate),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                   const SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -114,6 +120,7 @@ class TaskCard extends StatelessWidget {
                     child: Text(
                       task.priority.toString().split('.').last,
                       style: TextStyle(fontSize: 12, color: priorityColor),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
